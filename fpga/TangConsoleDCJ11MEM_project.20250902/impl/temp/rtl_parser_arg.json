@@ -1,0 +1,29 @@
+{
+ "Device" : "GW5AST-138B",
+ "Files" : [
+  {
+   "Path" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/integer_division/integer_division.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/sdhd.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/uart.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

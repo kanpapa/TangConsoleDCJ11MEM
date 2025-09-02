@@ -12,6 +12,22 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - 物理空間を18bitに拡張しました．これによりunix v6が多少マシに動くようになりました．
 - レベル変換用ICをCPUボード上に実装しました．
 
+# このレポジトリについて
+- diskimages
+  - ライセンスはPDF参照
+- pcb
+  - rev2.0
+
+
+- TangConsoleDCJ11MEM_project
+
+- TangConsoleDCJ11MEM_project
+  - GOWIN FPGA Designer V1.9.11.02(64-bit)build(80616)
+  - dual purpose pin
+  - integer_division
+  
+
+
 # ハードウェア
 ## FPGAに実装した機能
 - コンソール入出力用UART

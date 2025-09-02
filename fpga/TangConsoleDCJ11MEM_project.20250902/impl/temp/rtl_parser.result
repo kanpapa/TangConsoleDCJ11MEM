@@ -1,0 +1,62 @@
+[
+ {
+  "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+  "InstLine" : 54,
+  "InstName" : "top",
+  "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+  "ModuleLine" : 54,
+  "ModuleName" : "top",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+    "InstLine" : 635,
+    "InstName" : "integer_division",
+    "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/integer_division/integer_division.v",
+    "ModuleLine" : 13408,
+    "ModuleName" : "Integer_Division_Top",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/integer_division/integer_division.v",
+      "InstLine" : 13425,
+      "InstName" : "integer_division_inst",
+      "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/integer_division/integer_division.v",
+      "ModuleLine" : 10,
+      "ModuleName" : "(integer_division)/(Integer_Division_Top)"
+     }
+    ]
+   },
+   {
+    "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+    "InstLine" : 1279,
+    "InstName" : "uart_rx_inst",
+    "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/uart.v",
+    "ModuleLine" : 151,
+    "ModuleName" : "uart_rx"
+   },
+   {
+    "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+    "InstLine" : 1293,
+    "InstName" : "uart_tx_inst",
+    "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/uart.v",
+    "ModuleLine" : 18,
+    "ModuleName" : "uart_tx"
+   },
+   {
+    "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+    "InstLine" : 1323,
+    "InstName" : "sdhd_inst",
+    "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/sdhd.v",
+    "ModuleLine" : 11,
+    "ModuleName" : "sdhd"
+   },
+   {
+    "InstFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/top.v",
+    "InstLine" : 1551,
+    "InstName" : "uart_tx_inst_dbg",
+    "ModuleFile" : "C:/wks/ework/FPGA/TangNano/console/TangConsoleDCJ11MEM/v6/TangConsoleDCJ11MEM_project/src/uart.v",
+    "ModuleLine" : 18,
+    "ModuleName" : "uart_tx"
+   }
+  ]
+ }
+]
