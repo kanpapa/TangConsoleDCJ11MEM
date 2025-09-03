@@ -15,7 +15,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   ├── Caldera-license.pdf : UNIXのライセンス条項
 │   ├── sd-unix-v1.dsk      : unix v1用disk image
 │   └── sd-unix-v6.dsk      : unix v6用disk image
-├── fpga                     : Tang Console用プロジェクト
+├── fpga                     : Gowin EDA用プロジェクト
 │   └── TangConsoleDCJ11MEM_project.20250902
 │       └── src
 │             ├── rom.v      : unix ブートローダー
