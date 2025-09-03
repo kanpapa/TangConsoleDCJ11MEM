@@ -17,14 +17,12 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   └── sd-unix-v6.dsk      : unix v6用disk image
 ├── fpga
 │   └── TangConsoleDCJ11MEM_project.20250902 : Tang Console用プロジェクト
-│       ├── src
-│       │    ├── rom.v     : unix ブートローダー
-│       │    ├── sdhd.v    : HDシミュレータモジュール
-│       │    ├── TangConsoleDCJ11MEM.sdc
-│       │    ├── tc138k.cst : TangConsole用物理制約
-│       │    ├── top.v     : top module
-│       │    └── uart.v    : uartモジュール
-│       └── TangConsoleDCJ11MEM.gprj
+│       └── src
+│             ├── rom.v      : unix ブートローダー
+│             ├── sdhd.v     : HDシミュレータモジュール
+│             ├── tc138k.cst : TangConsole用物理制約(ピンアサイン)
+│             ├── top.v      : top module
+│             └── uart.v     : uartモジュール
 ├── pcb
 │   └── rev2.0 : 基板関連ファイル一式(KiCAD 8)
 └── README.md
