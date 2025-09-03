@@ -20,11 +20,11 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │       └── src
 │             ├── rom.v      : unix ブートローダー
 │             ├── sdhd.v     : HDシミュレータモジュール
-│             ├── tc138k.cst : TangConsole用物理制約(ピンアサイン)
+│             ├── tc138k.cst : 物理制約(ピンアサイン)
 │             ├── top.v      : top module
 │             └── uart.v     : uartモジュール
 ├── pcb
-│   └── rev2.0 : 基板関連ファイル一式(KiCAD 8)
+│   └── rev2.0 : 回路図，基板データ等(KiCAD 8)
 └── README.md
 ```
 - diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf に従います．
