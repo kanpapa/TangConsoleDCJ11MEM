@@ -31,8 +31,10 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 # 動作状況
 - unix v1
+  - multi userで起動，rootでログインできました．
   - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
 - unix v6
+  - multi userで起動，rootでログインできました．
   - /usr/games/ にあるchessやbj, tttなどが動きました．
   - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
   - ccが動きません．
@@ -103,7 +105,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 # 補足情報
 ## SDメモリ用イメージの作り方
-- TangNano20Kのときと全く同じです．[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，[]
+- TangNano20Kのときと全く同じです．[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，
 [unix-v6 sd用イメージ作成手順](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v6) を参照して下さい．
 
 ## Gowin EDA関連の注意点
