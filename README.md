@@ -4,7 +4,7 @@ DEC DCJ11 processor test board using memory systems and peripherals implemented 
 This document is written mostly in Japanese. If necessary, please use a translation service such as DeepL or Google.
 
 # 概要
-- PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGA(TangConsole138K)上に実装する試みです．
+- PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGAボード(Tang Console 138K)上に実装する試みです．
 - TangNano20Kを用いた同様のプロジェクト[TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM)の続編です．
 - UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
 
