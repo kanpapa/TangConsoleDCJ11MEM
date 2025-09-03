@@ -84,7 +84,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 # 使い方
 ## ターミナルソフト(TeraTerm, PDP11GUI)との接続
-- TTY入出力はTangConsoleのUSB(JTAGと共用)とCPU基板のUARTの2箇所に同じものが出ています．当初USBが不安定だったのでそのようにしたのですがが，今はわりと安定してきたのでUSBだけでOKです．(両方使うとTeraTermとPDP11GUIを同時に接続できます．)
+- TTY入出力はTangConsoleのUSB(JTAGと共用)とCPU基板のUARTの2箇所に同じものが出ています．当初USBが不安定だったのでそのようにしたのですが，今はわりと安定してきたのでUSBだけでOKです．(両方使うとTeraTermとPDP11GUIを同時に接続できます．)
 - TeraTermの設定
   - 基本的には115200bps,8N1N．ただし，UNIX V6だと7bit, parity=spaceにする必要あり．
   - 改行コードは入力出力ともCR
@@ -114,20 +114,23 @@ restrictions stated in Contract with Western
 Electric Company, Inc.
 
 login: root
-# ls
-bin
-dev
-etc
-hpunix
-lib
-mnt
-rkunix
-rpunix
-tmp
-unix
-usr
 # who
 root    tty8 Oct 10 14:28
+# date
+Fri Oct 10 14:28:42 EDT 1975
+# ls -l
+total 247
+drwxrwxr-x  2 bin      1104 May 14 00:47 bin
+drwxrwxr-x  2 bin      1824 Oct 10 12:33 dev
+drwxrwxr-x  2 bin       496 Oct 10 14:28 etc
+-rwxrwxrwx  1 root    29074 Oct 10 12:28 hpunix
+drwxrwxr-x  2 bin       464 Oct 10 13:28 lib
+drwxrwxr-x  2 bin        32 May 13 20:01 mnt
+-rwxrwxrwx  1 root    28836 Oct 10 12:22 rkunix
+-rwxrwxrwx  1 root    29020 Oct 10 12:25 rpunix
+drwxrwxrwx  2 bin       272 Oct 10 14:19 tmp
+-rwxrwxrwx  1 root    30346 Oct 10 12:32 unix
+drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 #
 ```
 
@@ -141,7 +144,7 @@ root    tty8 Oct 10 14:28
 - UARTのポートが複数あるので，Gowin programmerでは適切なポートを選択する必要があります．
 
 ## デバッグ用端子
-- pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
+- pmod1[1]にデバッグ用のログ(ディスクアクセスや割り込み等)を出力しています．
 - pmod0[7:0]にデバッグ用のLEDを接続するようになっています．
 - 基板の右上にあるBS[1:0], MAP_n, STRB_nは将来もしかしたら使うかもと思って用意している信号です．3.3Vに変換済みです．
 
