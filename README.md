@@ -55,6 +55,12 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - DAL[21:18]も見ていません．
 
 ## 基板 rev.2.0
+- TangNano20K版とは違い，レベル変換ICをCPUボードに搭載してみました．
+- CPUの入力信号(FPGA→CPU)はレベル変換せずに直接接続しています．
+- ABORT_nはオープンコレクタなので下記のように実装しています．
+```
+  assign ABORT_n = bus_error ? 1'b0 : 1'bz; // simulate open collector output
+```
 ![](images/rev20.jpg)
 #### BOM
 |Reference          |Qty| Value          |Size |Memo |
