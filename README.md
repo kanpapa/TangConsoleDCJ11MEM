@@ -11,12 +11,12 @@ This document is written mostly in Japanese. If necessary, please use a translat
 # ここにある主なファイル
 ```
 .
-├── diskimage : SDメモリ用データ
-│   ├── Caldera-license.pdf : UNIXのライセンス条項
-│   ├── sd-unix-v1.dsk      : unix v1用disk image
-│   └── sd-unix-v6.dsk      : unix v6用disk image
-├── fpga
-│   └── TangConsoleDCJ11MEM_project.20250902 : Tang Console用プロジェクト
+├── diskimage                 : SDメモリ用データ
+│   ├── Caldera-license.pdf  : UNIXのライセンス条項
+│   ├── sd-unix-v1.dsk       : unix v1用disk image
+│   └── sd-unix-v6.dsk       : unix v6用disk image
+├── fpga                      : Tang Console用プロジェクト
+│   └── TangConsoleDCJ11MEM_project.20250902
 │       └── src
 │             ├── rom.v      : unix ブートローダー
 │             ├── sdhd.v     : HDシミュレータモジュール
