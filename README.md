@@ -40,6 +40,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
     - /usr/games/ にあるchessやbj, tttなどが動きました．
     - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
     - ccが動きません．
+- たまにbootに失敗することがあります．その場合はTang Consoleのmodeボタン(pmod端子の間にあるスイッチ)を押して再起動します．
 
 # ハードウェア
 ## FPGAに実装した機能
@@ -105,7 +106,29 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - loginプロンプトが出るのでrootでログインします．
 ```
 @774000g@unix
+mem = 1026
+RESTRICTED RIGHTS
 
+Use, duplication or disclosure is subject to
+restrictions stated in Contract with Western
+Electric Company, Inc.
+
+login: root
+# ls
+bin
+dev
+etc
+hpunix
+lib
+mnt
+rkunix
+rpunix
+tmp
+unix
+usr
+# who
+root    tty8 Oct 10 14:28
+#
 ```
 
 # 補足情報
