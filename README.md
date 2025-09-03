@@ -27,7 +27,8 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   └── rev2.0 : 回路図，基板データ等(KiCAD 8用)
 └── README.md
 ```
-- diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf に従います．
+- diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf (昔のBSD?)に従います．
+- その他の部分についてはMITライセンスです．
 
 # 動作状況
 - UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
