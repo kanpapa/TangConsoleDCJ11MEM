@@ -24,7 +24,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │             ├── top.v      : top module
 │             └── uart.v     : uartモジュール
 ├── pcb
-│   └── rev2.0 : 回路図，基板データ等(KiCAD 8)
+│   └── rev2.0 : 回路図，基板データ等(KiCAD 8用)
 └── README.md
 ```
 - diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf に従います．
@@ -77,13 +77,16 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - これらとは別に，pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
 
 
-# [応用例(applications/)](applications/)
-## [UNIX V1(applications/unix-v1)](applications/unix-v1/)
-- SDメモリを使ったdiskエミュレータを作成し，UNIX V1を動かしてみました．
-- 最初はかなり不安定でしたが，だいぶ安定して動くようになってきました．
+## UNIX V1
 
-## [UNIX V6(applications/unix-v6)](applications/unix-v6/)(実験用)
-- unix-v1用をベースにUNIX V6に必要な機能を逐次追加中です．修正のたびにV1の動作確認をするのは面倒なのでV1用と分けることにしました．
+## UNIX V6
+
+# 補足情報
+## SDメモリ用イメージの作り方
+
+## 論理合成時の注意点
+- dual purpose pin
+
 
 # 開発環境
 - Windows 11
@@ -95,45 +98,11 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - TeraTerm
   - PDP11GUI
 
-## メモ
-- FPGAのプロジェクトを
-- dual purpose pin
-  - integer_division
-  
-
 # 動画
 - [PDP-11 Paper-Tape BASIC running on DCJ-11 Processor](https://www.youtube.com/watch?v=F_eFMz5ysK8)
 
-- [UNIX V1 on DEC DCJ-11 with TangNano 20K (under development)](https://www.youtube.com/watch?v=DT7xJWeF46Y)
-
-- [UNIX V1 on DEC DCJ-11 with TangNano 20K](https://www.youtube.com/watch?v=G9AFgAaTexo)
-
 # 関連情報
-## データシート等
-### bitsavers
-- [DCJ11 Microprocessor User's Guide](http://www.bitsavers.org/pdf/dec/pdp11/1173/EK-DCJ11-UG-PRE_J11ug_Oct83.pdf), DEC, EK-DCJ11-UG-PRE(Preliminary)
-- [Index of /pdf/dec/pdp11/j11](http://bitsavers.trailing-edge.com/pdf/dec/pdp11/j11/)
-- [Index of /pdf/dec/pdp11/1173](http://bitsavers.trailing-edge.com/pdf/dec/pdp11/1173/)
-
-## 先行事例，先駆者たち
-- [PDP-11/HACK](http://madrona.ca/e/pdp11hack/index.html), Brent Hilpert
-- [My PDP-11 Projects](https://www.5volts.ch/pages/pdp11hack/), Peter Schranz
-- [PDP11 on a breadboard A.K.A. J11 Hack](https://www.chronworks.com/J11/), Len Bayles
-- [S100 Bus PDP-11 CPU Board](http://www.s100computers.com/My%20System%20Pages/PDP11%20Board/PDP11%20Board.htm), John Monahan
-
-## 開発環境関連
-- [PDP-11(エミュ）上でCで"Hello, World!"](https://qiita.com/hifistar/items/8eff4a73087f3a41e19f), hifistar
-- [PDP-11のgccクロスコンパイル環境の構築メモ](https://qiita.com/hifistar/items/187fd7ad780c6aa26141), hifistar
-- [SimH (History Simulator)](http://simh.trailing-edge.com/)
-- [j-hoppe/PDP11GUI](https://github.com/j-hoppe/PDP11GUI)
-
-## UNIX関連
-- [The Unix Heritage Society](https://www.tuhs.org/)
-- [V1](https://www.tuhs.org/cgi-bin/utree.pl?file=V1)
-- [UNIX First Edition](https://gunkies.org/wiki/UNIX_First_Edition)
-- [jserv/unix-v1](https://github.com/jserv/unix-v1)
-
-## 関連記事
+・ 関連情報，先行事例等については [TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM) の末尾にまとめてあります．
 
 # 更新履歴
 - 2025/09/03: 初版公開
