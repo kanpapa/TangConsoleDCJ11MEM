@@ -7,7 +7,6 @@ This document is written mostly in Japanese. If necessary, please use a translat
 # 概要
 - PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGAボード(Tang Console 138K)上に実装する試みです．
 - TangNano20Kを用いた同様のプロジェクト[TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM)の続編です．
-- UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
 
 # 主要なファイル一覧
 ```
@@ -31,14 +30,15 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf に従います．
 
 # 動作状況
-- unix v1
-  - multi userで起動，rootでログインできました．
-  - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
-- unix v6
-  - multi userで起動，rootでログインできました．
-  - /usr/games/ にあるchessやbj, tttなどが動きました．
-  - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
-  - ccが動きません．
+- UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
+  - unix v1
+    - multi userで起動，rootでログインできました．
+    - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
+  - unix v6
+    - multi userで起動，rootでログインできました．
+    - /usr/games/ にあるchessやbj, tttなどが動きました．
+    - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
+    - ccが動きません．
 
 # ハードウェア
 ## FPGAに実装した機能
