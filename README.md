@@ -94,7 +94,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - VMware Workstation 17 Player
     - Ubuntu 22.04.4
       - simh
-- TeraTerm
+  - TeraTerm
   - PDP11GUI
 
 ## メモ
