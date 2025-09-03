@@ -11,21 +11,22 @@ This document is written mostly in Japanese. If necessary, please use a translat
 # ここにある主なファイル
 ```
 .
-├── diskimage
-│   ├── Caldera-license.pdf
-│   ├── sd-unix-v1.dsk
-│   └── sd-unix-v6.dsk
-├── fpga
+├── diskimage : SDメモリ用disk image
+│   ├── Caldera-license.pdf : disk imageのライセンス条項
+│   ├── sd-unix-v1.dsk      : unix v1用disk image
+│   └── sd-unix-v6.dsk      : unix v6用disk image
+├── fpga : Gowin design用プロジェクト
 │   └── TangConsoleDCJ11MEM_project.20250902
 │       ├── src
-│       │   ├── rom.v
-│       │   ├── sdhd.v
-│       │   ├── TangConsoleDCJ11MEM.sdc
-│       │   ├── tc138k.cst
-│       │   ├── top.v
-│       │   └── uart.v
+│       │    ├── rom.v     : unix ブートローダー
+│       │    ├── sdhd.v    : HDシミュレータモジュール
+│       │    ├── TangConsoleDCJ11MEM.sdc
+│       │    ├── tc138k.cst : TangConsole用物理制約
+│       │    ├── top.v     : top module
+│       │    └── uart.v    : uartモジュール
+│       └── TangConsoleDCJ11MEM.gprj
 ├── pcb
-│   └── rev2.0
+│   └── rev2.0 : 基板関連ファイル一式(KiCAD 8)
 └── README.md
 ```
 
