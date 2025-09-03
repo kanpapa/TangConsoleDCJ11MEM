@@ -82,9 +82,12 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 # 使い方
 ## ターミナルソフト(TeraTerm, PDP11GUI)との接続
-- シリアルの設定は基本的には115200bps,8N1Nにしています．(UNIX V6だとTeraTermで7N1Nにしないと文字化けする現象あり．)
-- TTY入出力はTangConsoleのUSB(JTAGと共用)ですが，最初の頃にわりと不安定だったので，CPUボード上にもUART(GPIO_UART)を用意してミラーリングしています．TeraTermとPDP11GUIを同時に接続できます．
-- これらとは別に，pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
+- TTY入出力はTangConsoleのUSB(JTAGと共用)，とCPU基板のUARTの2箇所に同じものが出ています．当初USBが不安定だったのでそのようにしたのですがが，今はわりと安定してきたのでUSBだけでOKです．(両方使うとTeraTermとPDP11GUIを同時に接続できます．)
+- TeraTermの設定
+  - 基本的には115200bps,8N1N．ただし，UNIX V6だと7bit, parity=spaceにする必要あり．
+  - 改行コードは入力出力ともCR
+  - 送信遅延 10ms/字, 100ms/行
+- CPU基板のUARTは，TXは3.3V出力(5VTTLで受信可)，RXは5V耐性なので，USBシリアル変換ケーブルは3.3V用，5V用のどちらでもOKです．
 
 ## UNIX V1
 - SDメモリにddでsd-unix-v1.dskを書き込み，TangConsoleのスロットにセットします．
@@ -112,6 +115,11 @@ This document is written mostly in Japanese. If necessary, please use a translat
 ## Gowin EDA関連の注意点
 - Configurationのdual-purpose pinで，SSPI, READY, DONE, CPUをチェックします．
 - UARTのポートが複数あるので，Gowin programmerでは適切なポートを選択する必要があります．
+
+## デバッグ用端子
+- pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
+- pmod0[7:0]にデバッグ用のLEDを接続するようになっています．
+- 基板の右上にあるBS[1:0], MAP_n, STRB_nは将来もしかしたら使うかもと思って用意している信号です．3.3Vに変換済みです．
 
 ## 開発環境
 - Windows 11
