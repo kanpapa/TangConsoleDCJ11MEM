@@ -29,8 +29,15 @@ This document is written mostly in Japanese. If necessary, please use a translat
 ```
 - diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf に従います．
 
-# ハードウェア
+# 動作状況
+- unix v1
+  - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
+- unix v6
+  - /usr/games/ にあるchessやbj, tttなどが動きました．
+  - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
+  - ccが動きません．
 
+# ハードウェア
 ## FPGAに実装した機能
 - コンソール入出力用UART
 - Initialization Sequence時のPower-Up Configuration Register設定
@@ -71,22 +78,37 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - SN74CB3T3245はパッケージサイズに注意．SOIC-20はDWかDWRです．PWやPWRではありません．
 
 # 使い方
-## ターミナルソフトとの接続
+## ターミナルソフト(TeraTerm, PDP11GUI)との接続
 - シリアルの設定は基本的には115200bps,8N1Nにしています．(UNIX V6だとTeraTermで7N1Nにしないと文字化けする現象あり．)
 - TTY入出力はTangConsoleのUSB(JTAGと共用)ですが，最初の頃にわりと不安定だったので，CPUボード上にもUART(GPIO_UART)を用意してミラーリングしています．TeraTermとPDP11GUIを同時に接続できます．
 - これらとは別に，pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
 
-
 ## UNIX V1
+- SDメモリにddでsd-unix-v1.dskを書き込み，TangConsoleのスロットにセットします．
+- 773000gでブートローダーを起動します．
+- loginプロンプトが出るのでrootでログインします．
+```
+@773000g
+
+```
 
 ## UNIX V6
+- SDメモリにddでsd-unix-v6.dskを書き込み，TangConsoleのスロットにセットします．
+- 774000gでブートローダーを起動するとすぐにプロンプト'@'が出るので，'unix'と入力します．
+- loginプロンプトが出るのでrootでログインします．
+```
+@774000g@unix
+
+```
 
 # 補足情報
 ## SDメモリ用イメージの作り方
+- TangNano20Kのときと全く同じです．[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，[]
+[unix-v6 sd用イメージ作成手順](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v6) を参照して下さい．
 
-## 論理合成時の注意点
-- dual purpose pin
-
+## Gowin EDA関連の注意点
+- Configurationのdual-purpose pinで，SSPI, READY, DONE, CPUをチェックします．
+- UARTのポートが複数あるので，Gowin programmerでは適切なポートを選択する必要があります．
 
 ## 開発環境
 - Windows 11
@@ -97,9 +119,6 @@ This document is written mostly in Japanese. If necessary, please use a translat
       - simh
   - TeraTerm
   - PDP11GUI
-
-# 動画
-- [PDP-11 Paper-Tape BASIC running on DCJ-11 Processor](https://www.youtube.com/watch?v=F_eFMz5ysK8)
 
 # 関連情報
 ・ 関連情報，先行事例等については [TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM) の末尾にまとめてあります．
