@@ -88,7 +88,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - dual purpose pin
 
 
-# 開発環境
+## 開発環境
 - Windows 11
   - KiCAD 8.0.5
   - GOWIN FPGA Designer V1.9.11.02(64-bit)
