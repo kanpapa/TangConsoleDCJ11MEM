@@ -40,7 +40,6 @@ This document is written mostly in Japanese. If necessary, please use a translat
     - /usr/games/ にあるchessやbj, tttなどが動きました．
     - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
     - ccが動きません．
-- たまにbootに失敗することがあります．その場合はTang Consoleのmodeボタン(pmod端子の間にあるスイッチ)を押して再起動します．
 
 # ハードウェア
 ## FPGAに実装した機能
