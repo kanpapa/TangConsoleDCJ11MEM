@@ -6,29 +6,31 @@ This document is written mostly in Japanese. If necessary, please use a translat
 # 概要
 - PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGA(TangConsole138K)上に実装する試みです．
 - TangNano20Kを用いた同様のプロジェクト[TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM)の続編です．
-- UNIX first edition (UNIX V1), UNIX 6th editon (unix v6)が
+- UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
 
-## TangNano20K版との主な違い
-- 物理空間を18bitに拡張しました．これによりunix v6が多少マシに動くようになりました．
-- レベル変換用ICをCPUボード上に実装しました．
-
-# このレポジトリについて
-- diskimages
-  - ライセンスはPDF参照
-- pcb
-  - rev2.0
-
-
-- TangConsoleDCJ11MEM_project
-
-- TangConsoleDCJ11MEM_project
-  - GOWIN FPGA Designer V1.9.11.02(64-bit)build(80616)
-  - dual purpose pin
-  - integer_division
-  
-
+# ここにある主なファイル
+```
+.
+├── diskimage
+│   ├── Caldera-license.pdf
+│   ├── sd-unix-v1.dsk
+│   └── sd-unix-v6.dsk
+├── fpga
+│   └── TangConsoleDCJ11MEM_project.20250902
+│       ├── src
+│       │   ├── rom.v
+│       │   ├── sdhd.v
+│       │   ├── TangConsoleDCJ11MEM.sdc
+│       │   ├── tc138k.cst
+│       │   ├── top.v
+│       │   └── uart.v
+├── pcb
+│   └── rev2.0
+└── README.md
+```
 
 # ハードウェア
+
 ## FPGAに実装した機能
 - コンソール入出力用UART
 - Initialization Sequence時のPower-Up Configuration Register設定
@@ -41,12 +43,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - BS0, BS1は見ていません．DAL[15:0]とAIO[3:0]を見ればとりあえず十分だったので．
 - DAL[21:18]も見ていません．
 
-## ターミナルソフトとの接続
-- シリアルの設定は基本的には115200bps,8N1Nにしています．(UNIX V6だとTeraTermで7N1Nにしないと文字化けする現象あり．)
-- TTY入出力はTangConsoleのUSB(JTAGと共用)ですが，最初の頃にわりと不安定だったので，CPUボード上にもUART(GPIO_UART)を用意してミラーリングしています．TeraTermとPDP11GUIを同時に接続できます．
-- これらとは別に，pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
-
-## PCB rev.2.0
+## 基板 rev.2.0
 ![](images/rev20.jpg)
 #### BOM
 |Reference          |Qty| Value          |Size |Memo |
@@ -73,6 +70,13 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 - SN74CB3T3245はパッケージサイズに注意．SOIC-20はDWかDWRです．PWやPWRではありません．
 
+#使い方
+## ターミナルソフトとの接続
+- シリアルの設定は基本的には115200bps,8N1Nにしています．(UNIX V6だとTeraTermで7N1Nにしないと文字化けする現象あり．)
+- TTY入出力はTangConsoleのUSB(JTAGと共用)ですが，最初の頃にわりと不安定だったので，CPUボード上にもUART(GPIO_UART)を用意してミラーリングしています．TeraTermとPDP11GUIを同時に接続できます．
+- これらとは別に，pmod1[0]にデバッグ用のディスクアクセスログを出力しています．
+
+
 # [応用例(applications/)](applications/)
 ## [UNIX V1(applications/unix-v1)](applications/unix-v1/)
 - SDメモリを使ったdiskエミュレータを作成し，UNIX V1を動かしてみました．
@@ -80,6 +84,19 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 ## [UNIX V6(applications/unix-v6)](applications/unix-v6/)(実験用)
 - unix-v1用をベースにUNIX V6に必要な機能を逐次追加中です．修正のたびにV1の動作確認をするのは面倒なのでV1用と分けることにしました．
+
+# 開発環境
+- Windows 11
+  - KiCAD 8.0.5
+  - GOWIN FPGA Designer V1.9.11.02(64-bit)
+  - VMware Workstation 17 Player
+    - Ubuntu 22.04.4
+
+## メモ
+- FPGAのプロジェクトを
+- dual purpose pin
+  - integer_division
+  
 
 # 動画
 - [PDP-11 Paper-Tape BASIC running on DCJ-11 Processor](https://www.youtube.com/watch?v=F_eFMz5ysK8)
