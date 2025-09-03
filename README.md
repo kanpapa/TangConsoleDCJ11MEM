@@ -8,7 +8,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGAボード(Tang Console 138K)上に実装する試みです．
 - TangNano20Kを用いた同様のプロジェクト[TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM)の続編です．
 
-# 主要なファイル一覧
+## 主要なファイル一覧
 ```
 .
 ├── diskimage : SDメモリ用データ
@@ -30,7 +30,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf (昔のBSD?)に従います．
 - その他の部分についてはMITライセンスです．
 
-# 動作状況
+## 動作状況
 - UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
   - unix v1
     - multi userで起動，rootでログインできました．
