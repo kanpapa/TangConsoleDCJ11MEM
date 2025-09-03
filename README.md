@@ -11,12 +11,12 @@ This document is written mostly in Japanese. If necessary, please use a translat
 # ここにある主なファイル
 ```
 .
-├── diskimage : SDメモリ用disk image
-│   ├── Caldera-license.pdf : disk imageのライセンス条項
+├── diskimage : SDメモリ用データ
+│   ├── Caldera-license.pdf : UNIXのライセンス条項
 │   ├── sd-unix-v1.dsk      : unix v1用disk image
 │   └── sd-unix-v6.dsk      : unix v6用disk image
-├── fpga : Gowin design用プロジェクト
-│   └── TangConsoleDCJ11MEM_project.20250902
+├── fpga
+│   └── TangConsoleDCJ11MEM_project.20250902 : Tang Console用プロジェクト
 │       ├── src
 │       │    ├── rom.v     : unix ブートローダー
 │       │    ├── sdhd.v    : HDシミュレータモジュール
@@ -29,6 +29,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   └── rev2.0 : 基板関連ファイル一式(KiCAD 8)
 └── README.md
 ```
+- diskimageフォルダ内にあるSDメモリ用のイメージファイルはUNIXのオリジナルソースからの派生物なので，ライセンス条件は Caldera-license.pdf に従います．
 
 # ハードウェア
 
@@ -71,7 +72,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 - SN74CB3T3245はパッケージサイズに注意．SOIC-20はDWかDWRです．PWやPWRではありません．
 
-#使い方
+# 使い方
 ## ターミナルソフトとの接続
 - シリアルの設定は基本的には115200bps,8N1Nにしています．(UNIX V6だとTeraTermで7N1Nにしないと文字化けする現象あり．)
 - TTY入出力はTangConsoleのUSB(JTAGと共用)ですが，最初の頃にわりと不安定だったので，CPUボード上にもUART(GPIO_UART)を用意してミラーリングしています．TeraTermとPDP11GUIを同時に接続できます．
