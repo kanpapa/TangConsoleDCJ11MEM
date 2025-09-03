@@ -60,7 +60,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 |Reference          |Qty| Value          |Size |Memo |
 |-------------------|---|----------------|-----|-----|
 |C1,C2              |2  |68pF            |||
-|C3,C5～C8     |5  |0.1uF           |||
+|C3,C5,C6,C7,C8     |5  |0.1uF           |||
 |C4                 |1  |1uF           |||
 |C9,C10             |2	|0.33uF	         ||DECのプロセッサボードで0.33uFを使っていたので．0.1uFでもOK．|
 |C11                |1  |47uF            |||
@@ -69,13 +69,13 @@ This document is written mostly in Japanese. If necessary, please use a translat
 |J2,J3              |2  |pin header or socket|1x30|任意．テストや観測，実験用．|J4                 |1  |pin header      |1x06 L字|UART用|
 |J5                 |1  |pin header or socket |2x03 |不要．拡張用．|
 |R1                 |1  |1M              |||
-|R2～R10            |9  |10k            || |
+|R2,R3,R4,R5,R6,R7,R8,R9,R10   |9  |10k            || |
 |R11                |1  |33             ||CLK2(出力)のダンピング抵抗|
 |R12                |1  |100k            || 値はLEDに合わせて任意．最近のLEDは明るいので100kぐらいでちょうどいい．|
 |R13,R14            |2  |1k              |||
 |SW1,SW2            |2  |tactile SW      |6mmxH4.3mm|例: https://akizukidenshi.com/catalog/g/g103647/ |
 |U1                 |1  |DCJ11           |60pin DIP 1300mil| 1x30 の丸ピンソケット2列|
-|U2～U5             |4  |SN74CB3T3245DWR (又はDW) |SOIC-20|https://mou.sr/3URN55f https://www.digikey.jp/short/9485r0f0  |
+|U2,U3,U4,U5        |4  |SN74CB3T3245DWR (又はDW) |SOIC-20|https://mou.sr/3URN55f https://www.digikey.jp/short/9485r0f0  |
 |U6                 |1  |NJM12888F33     |SOT-23-5 | https://akizukidenshi.com/catalog/g/g110675/|
 |Y1                 |1  |18MHz           |HC49|例: https://mou.sr/3WcWExh , もしかしたら周波数を変える必要があるかもしれないのでソケットを使用|
 
