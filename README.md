@@ -83,7 +83,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 
 # 使い方
 ## ターミナルソフト(TeraTerm, PDP11GUI)との接続
-- TTY入出力はTangConsoleのUSB(JTAGと共用)，とCPU基板のUARTの2箇所に同じものが出ています．当初USBが不安定だったのでそのようにしたのですがが，今はわりと安定してきたのでUSBだけでOKです．(両方使うとTeraTermとPDP11GUIを同時に接続できます．)
+- TTY入出力はTangConsoleのUSB(JTAGと共用)とCPU基板のUARTの2箇所に同じものが出ています．当初USBが不安定だったのでそのようにしたのですがが，今はわりと安定してきたのでUSBだけでOKです．(両方使うとTeraTermとPDP11GUIを同時に接続できます．)
 - TeraTermの設定
   - 基本的には115200bps,8N1N．ただし，UNIX V6だと7bit, parity=spaceにする必要あり．
   - 改行コードは入力出力ともCR
