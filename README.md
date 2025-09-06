@@ -186,7 +186,7 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 
 # 補足情報
 ## SDメモリ用イメージの作り方
-- TangNano20Kのときと全く同じです．[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，
+- [diskimageフォルダ](./diskimage)にあるイメージファイルはTangNano20Kのときと全く同じ方法で作成したものです．作り方は[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，
 [unix-v6 sd用イメージ作成手順](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v6) を参照して下さい．
 
 ## Gowin EDA関連の注意点
