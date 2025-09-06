@@ -68,7 +68,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 |C1,C2              |2  |68pF            |||
 |C3,C5,C6,C7,C8     |5  |0.1uF           |||
 |C4                 |1  |1uF           |||
-|C9,C10             |2	|0.33uF	         ||DECのプロセッサボードで0.33uFを使っていたので．|
+|C9,C10             |2	|0.33uF	         |||
 |C11                |1  |47uF            |||
 |D1                 |1  |LED             || |
 |J1                 |1  |pin socket|2x20|TangConsole接続用．基板背面に実装．|
@@ -89,6 +89,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - R11は"33k"ではなく"33"ですよ．ダンピング抵抗なので．
 - R12は"100"ではなく"100k"ですよ．最近のLEDは明るいので100kぐらいでちょうどいい．
 -  Y1はもしかしたら周波数を変える必要があるかもしれないのでソケットを使用する方がいいかも．動作確認は18MHzでしかやってませんが．
+- C9,C10はDECのプロセッサボードで0.33uFを使っていたのでそうしましたが，間違って0.1uFを載せても動きました．
 
 # 使い方
 ## ターミナルソフト(TeraTerm, PDP11GUI)との接続
