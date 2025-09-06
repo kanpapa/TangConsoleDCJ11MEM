@@ -31,7 +31,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - その他の部分についてはMITライセンスです．
 
 ## 動作状況
-- UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動しますが，挙動がおかしい部分もあります．(特にv6)
+- UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動します．
   - unix v1
     - multi userで起動，rootでログインできました．
     - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
@@ -39,7 +39,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
     - multi userで起動，rootでログインできました．
     - /usr/games/ にあるchessやbj, tttなどが動きました．
     - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
-    - ccが動きません．
+    - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
 
 # ハードウェア
 ## FPGAに実装した機能
@@ -211,5 +211,9 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 # 関連情報
 ・ 関連情報，先行事例等については [TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM) の末尾にまとめてあります．
 
+# 動画
+- [UNIX V6 on DEC DCJ-11 (PDP-11) with Tang Console 138K](https://www.youtube.com/watch?v=6rK0t8tJp9Y)
+
 # 更新履歴
 - 2025/09/03: 初版公開
+- 2025/09/06: unix v6でもccが動いたのでREADME修正．
