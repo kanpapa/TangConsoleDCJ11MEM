@@ -40,7 +40,8 @@ This document is written mostly in Japanese. If necessary, please use a translat
     - /usr/games/ にあるchessやbj, tttなどが動きました．
     - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
     - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
-
+  - まれに(電源投入直後が多い)v6のブート時にpanicになって止まることがあります．Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．それでもダメなことが1度だけありましたが，SDメモリを書き直してリトライすると直りました．
+  
 # ハードウェア
 ## FPGAに実装した機能
 - コンソール入出力用UART
@@ -55,7 +56,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - DAL[21:18]も見ていません．
 
 ## 基板 rev.2.0
-- TangNano20K版とは違い，レベル変換ICをCPUボードに搭載してみました．
+- TangNano20K版とは違い，レベル変換ICをCPUボードに搭載してみました．(20K版の方でもCPUボード上に搭載した基板(rev3)を作りました．)
 - CPUの入力信号(FPGA→CPU)はレベル変換せずに直接接続しています．
 - ABORT_nはオープンコレクタなので下記のように実装しています．
 ```
@@ -221,3 +222,4 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 # 更新履歴
 - 2025/09/03: 初版公開
 - 2025/09/06: unix v6でもccが動いたのでREADME修正．
+- 2025/09/08: READMEに軽微な情報追加．
