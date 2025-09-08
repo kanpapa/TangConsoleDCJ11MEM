@@ -74,7 +74,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 |D1                 |1  |LED             || |
 |J1                 |1  |pin socket|2x20|TangConsole接続用．基板背面に実装．|
 |J2,J3              |2  |pin header or socket|1x30|任意．テストや観測，実験用．|J4                 |1  |pin header      |1x06 L字|UART用|
-|J5                 |1  |pin header or socket |2x03 |不要．拡張用．|
+|J5                 |1  |pin header or socket |2x03 |不要．将来使うかもしれない実験用．|
 |R1                 |1  |1M              |||
 |R2,R3,R4,R5,R6,R7,R8,R9,R10   |9  |10k            || |
 |R11                |1  |33             ||CLK2(出力)のダンピング抵抗．|
