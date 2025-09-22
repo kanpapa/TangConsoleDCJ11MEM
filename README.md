@@ -220,6 +220,10 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 - [UNIX V6 on DEC DCJ-11 (PDP-11) with Tang Console 138K](https://www.youtube.com/watch?v=6rK0t8tJp9Y)
 
 # 更新履歴
-- 2025/09/03: 初版公開
+- 2025/09/03: 初版(20250922)公開
 - 2025/09/06: unix v6でもccが動いたのでREADME修正．
 - 2025/09/08: READMEに軽微な情報追加．
+- 2025/09/22: 20250922版(pmod paper tape実装)暫定公開．(説明は未)
+
+
+
