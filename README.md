@@ -16,13 +16,16 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   ├── sd-unix-v1.dsk      : unix v1用disk image
 │   └── sd-unix-v6.dsk      : unix v6用disk image
 ├── hdl                      : Gowin EDA用プロジェクト
-│   └── TangConsoleDCJ11MEM_project.20250902
+│   ├── old                 : 旧版のバックアップ
+│   └── TangConsoleDCJ11MEM_project.xxxxxxxx
 │       └── src
-│             ├── rom.v      : unix ブートローダー
-│             ├── sdhd.v     : HDシミュレータモジュール
+│             ├── rom.v      : ブートローダー
+│             ├── sdhd.v     : HDエミュレータモジュール
+│             ├── sdtape.v   : 紙テープエミュレータモジュール
 │             ├── tc138k.cst : 物理制約(ピンアサイン)
-│             ├── top.v      : top module
-│             └── uart.v     : uartモジュール
+│             ├── top.v      : メインプログラム
+│             ├── uart.v     : uartモジュール
+│             └── ws2812.v   : WS2812モジュール
 ├── pcb
 │   └── rev2.0 : 回路図，基板データ等(KiCAD 8用)
 └── README.md
@@ -38,10 +41,17 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - unix v6
     - multi userで起動，rootでログインできました．
     - /usr/games/ にあるchessやbj, tttなどが動きました．
-    - /usr/bin/ にあるfortune, quiz, bannerなどが動きました．
-    - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
-  - まれに(電源投入直後が多い)v6のブート時にpanicになって止まることがあります．Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．それでもダメなことが1度だけありましたが，SDメモリを書き直してリトライすると直りました．
-  
+    - カーネルの再構築ができました．
+  - paper tape
+    - paper tape BASICが起動して簡単なプログラムが動作しました．
+  - rt-11 v4
+    - 起動してHELP, DIRが動きました．
+
+## 既知の問題
+- まれに(電源投入直後が多い)v6のブート時にpanicになって止まることがあります．
+Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．
+- v6のファイルシステムは壊れやすいような気がします．電源断前にはsync3〜4回のおまじないが必要かも．
+
 # ハードウェア
 ## FPGAに実装した機能
 - コンソール入出力用UART
@@ -51,6 +61,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - ブート用ROM
 - ハードディスクドライブ RF11, RK11 (sdメモリによるエミュレーション)
 - 外部演算装置 KE11-A (unix v1に必須)
+- 紙テープリーダパンチャ PC11
 - クロック KW11-L
 - BS0, BS1は見ていません．DAL[15:0]とAIO[3:0]を見ればとりあえず十分だったので．
 - DAL[21:18]も見ていません．
@@ -100,6 +111,27 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - 改行コードは入力出力ともCR
   - 送信遅延 10ms/字, 100ms/行
 - CPU基板のUARTは，TXは3.3V出力(5VTTLで受信可)，RXは5V耐性なので，USBシリアル変換ケーブルは3.3V用，5V用のどちらでもOKです．
+
+## Pmodコネクタ
+- Tang ConsoleのPmodを下記のように使用しています．
+```
+Pmod1: debug interface
+LOG_TX:  デバッグ用のログ(ディスクアクセスや割り込み等)出力
+LED_RGB: LEDアレイ(WS2812)
++-----+-----+--------+--------+--------+--------+
+| 3V3 | GND |LED_RGB |   NC   |   NC   |   NC   |
++-----+-----+--------+--------+--------+--------+
+| 3V3 | GND |   NC   |   NC   |   NC   | LOG_TX |
++-----+-----+--------+--------+--------+--------+
+
+Pmod0: paper tapeエミュレータ用SDメモリ．
+端子配列はDigilent Pmod MicroSD用です．
++-----+-----+---------+---------+---------+---------+
+| 3V3 | GND |  CLK    |MISO(D0) |MOSI(CMD)| ~CS(D3) |
++-----+-----+---------+---------+---------+---------+
+| 3V3 | GND | NC(~WP) |  ~DET   | NC(D2)  |  NC(D1) |
++-----+-----+---------+---------+---------+---------+
+```
 
 ## UNIX V1
 - SDメモリにddでsd-unix-v1.dskを書き込み，TangConsoleのスロットにセットします．
@@ -199,8 +231,6 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 - UARTのポートが複数あるので，Gowin programmerでは適切なポートを選択する必要があります．
 
 ## デバッグ用端子
-- pmod1[1]にデバッグ用のログ(ディスクアクセスや割り込み等)を出力しています．
-- pmod0[7:0]にデバッグ用のLEDを接続するようになっています．
 - 基板の右上にあるBS[1:0], MAP_n, STRB_nは将来もしかしたら使うかもと思って用意している信号です．3.3Vに変換済みです．
 
 ## 開発環境
