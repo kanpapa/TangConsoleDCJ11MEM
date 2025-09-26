@@ -230,7 +230,7 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 
 ## Paper Tape BASIC
 - Pmodのsdメモリを使って，[TangNano20K版のtapebasic](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/hdl/tapebasic)と同様の手順でBASICが起動できます．
-- SDメモリの先頭から0〜1GBを読み込み用，1GB〜2GBを書き込み用にしたので，SAVEコマンドも動いているはず．(SAVE後にSW1でバッファをフラッシュ．)
+- SDメモリの先頭から0〜1GBを読み込み用，1GB〜2GBを書き込み用にしたので，SAVEコマンドも動いているはず．(SAVE後にSW2でバッファをフラッシュ．)
 ```
 @157744g
 157500
