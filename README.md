@@ -8,6 +8,12 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGAボード(Tang Console 138K)上に実装する試みです．
 - TangNano20Kを用いた同様のプロジェクト[TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM)の続編です．
 
+# 最近の話題
+- 2025/09/12: PmodにWS2812アレイを接続してアドレスやデータを表示させてみました．
+- 2025/09/22: PmodのSDメモリに紙テープエミュレータを実装しました．tape BASICの実行や，unix v1, v6で読めます．
+- 2025/09/25: RT-11 v4がブートできました．
+- 2025/09/26: READMEにpmod端子，オンボードSWの説明を追加しました．
+
 ## 主要なファイル一覧
 ```
 .
