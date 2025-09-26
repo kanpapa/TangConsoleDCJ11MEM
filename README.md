@@ -133,6 +133,7 @@ Pmod0: paper tapeエミュレータ用SDメモリ．
 +-----+-----+---------+---------+---------+---------+
 ```
 ## SW1, SW2
+Tang Consoleのオンボードスイッチ(SW1, SW2)
 - SW1: LEDアレイの出力内容切り替え．詳細はtop.v参照．
 - SW2: sdtape.vの書き込みバッファのフラッシュ
 - SW1, SW2同時押し: SDメモリモジュール，UARTのリセット
@@ -228,7 +229,7 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 ```
 
 ## Paper Tape BASIC
-- Pmodのsdメモリを使って，(TangNano20K版のtapebasic)(https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/hdl/tapebasic)と同様の手順でBASICが起動できます．
+- Pmodのsdメモリを使って，[TangNano20K版のtapebasic](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/hdl/tapebasic)と同様の手順でBASICが起動できます．
 - SDメモリの先頭から0〜1GBを読み込み用，1GB〜2GBを書き込み用にしたので，SAVEコマンドも動いているはず．(SAVE後にSW1でバッファをフラッシュ．)
 ```
 @157744g
