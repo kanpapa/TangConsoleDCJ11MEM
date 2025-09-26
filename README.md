@@ -132,7 +132,13 @@ Pmod0: paper tapeエミュレータ用SDメモリ．
 | 3V3 | GND | NC(~WP) |  ~DET   | NC(D2)  |  NC(D1) |
 +-----+-----+---------+---------+---------+---------+
 ```
+## SW1, SW2
+- SW1: LEDアレイの出力内容切り替え．詳細はtop.v参照．
+- SW2: sdtape.vの書き込みバッファのフラッシュ
+- SW1, SW2同時押し: SDメモリモジュール，UARTのリセット
+  - Reconfigボタンでリセットの方を使うのであまり使っていません．
 
+# 各種OS起動例
 ## UNIX V1
 - SDメモリにddでsd-unix-v1.dskを書き込み，TangConsoleのスロットにセットします．
 - 773000gでブートローダーを起動します．
@@ -221,6 +227,32 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 #
 ```
 
+## Paper Tape BASIC
+- Pmodのsdメモリを使って，(TangNano20K版のtapebasic)(https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/hdl/tapebasic)と同様の手順でBASICが起動できます．
+- SDメモリの先頭から0〜1GBを読み込み用，1GB〜2GBを書き込み用にしたので，SAVEコマンドも動いているはず．(SAVE後にSW1でバッファをフラッシュ．)
+```
+@157744g
+157500
+@157500g
+PDP-11 BASIC, VERSION 007A
+*O ?
+DO YOU NEED THE EXTENDED FUNCTIONS?Y
+HIGH-SPEED READER/PUNCH?N
+SET UP THE EXTERNAL FUNCTION?N
+MEMORY?56
+READY
+10 PRINT "HELLO WORLD"
+LIST
+
+10 PRINT "HELLO WORLD"
+READY
+RUN
+HELLO WORLD
+
+STOP AT LINE   10
+READY
+```
+
 # 補足情報
 ## SDメモリ用イメージの作り方
 - [diskimageフォルダ](./diskimage)にあるイメージファイルはTangNano20Kのときと同じ方法で作成したものです．作り方は[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，
@@ -254,6 +286,4 @@ drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
 - 2025/09/06: unix v6でもccが動いたのでREADME修正．
 - 2025/09/08: READMEに軽微な情報追加．
 - 2025/09/22: 20250922版(pmod paper tape実装)暫定公開．(説明は未)
-
-
-
+- 2025/09/26: 20250926版公開．(RT-11 v4起動)
