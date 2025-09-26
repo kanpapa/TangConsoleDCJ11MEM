@@ -41,9 +41,10 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - unix v6
     - multi userで起動，rootでログインできました．
     - /usr/games/ にあるchessやbj, tttなどが動きました．
-    - カーネルの再構築ができました．
+    - 実機でカーネルの再構築ができました．
   - paper tape
     - paper tape BASICが起動して簡単なプログラムが動作しました．
+    - unix v1, unix v6のデバイスとして読むことができました．
   - rt-11 v4
     - 起動してHELP, DIRが動きました．
 
