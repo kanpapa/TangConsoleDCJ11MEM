@@ -32,8 +32,8 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   ├── 03_FPGA.md
 │   ├── 04_Interface.md
 │   ├── 05_SDmemory.md
-│   ├── 06_applications.md
-│   ├── 06-1-bootloader.md
+│   ├── 06-0_applications.md
+│   ├── 06-1_bootloader.md
 │   ├── 06-2_papertapebasic.md
 │   ├── 06-3_unix-v1.md
 │   ├── 06-4_unix-v6.md

@@ -1,6 +1,6 @@
 # 応用例
 
-## [ブートローダー](06-1-bootloader.md)
+## [ブートローダー](06-1_bootloader.md)
 ## [Paper Tape BASIC](06-2_papertapeBASIC.md)
 ## [Unix v1](06-3_unix-v1.md)
 ## [Unix v6](06-4_unix-v6.md)
