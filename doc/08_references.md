@@ -40,5 +40,5 @@ TangNanoDCJ11MEMを使って私がやっていないようなことまでやっ�
 
 ## その他のDCJ-11関連のプロジェクト
 - ushicow, [PDP-11 Card for Apple II の制作](https://note.com/ushicow/m/ma9f73d2251bc)
-- VARIABITS LAB [DCJ11](https://www.variabits.com/categories/dcj11/)
+- VARIABITS LAB, [DCJ11](https://www.variabits.com/categories/dcj11/)
 
