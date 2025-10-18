@@ -93,7 +93,7 @@ Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)�
     - Ubuntu 22.04.4
       - dd
       - simh
-- TeraTerm
+  - TeraTerm
   - PDP11GUI
 
 # 動画
