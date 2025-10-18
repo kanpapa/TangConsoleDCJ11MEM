@@ -11,7 +11,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 各種説明は[doc/](./doc/)にあるファイルに記載しています．
 
 ## 最近の話題
-- 以前の話題は[更新ログ](doc/00_updatelog.md)参照
+- 以前の話題は[更新ログ](doc/01_updatelog.md)参照
 - 2025/10/17
   - 磁気テープリーダ(TM11)等を実装してunix v7や2.9BSDをインストール可能なバージョン(20251017)を公開しました．わりと大幅なアップデートです．
   - ブートローダーのアドレスを実物のROM(BM873-YA)に準拠させるように変更しました．主なアドレスは下記のようになっています．詳細は[xxx](doc/xxx)を参照して下さい．
