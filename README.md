@@ -43,7 +43,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   ├── 07_debugtool
 │   └── 08_references.md
 ├── hdl                      : Gowin EDA用プロジェクト
-│   ├── old                 : 旧版のバックアップ
+│   ├── old                 : 旧版のバックアップ(あれば)
 │   └── TangConsoleDCJ11MEM_project.xxxxxxxx
 │       └── src
 │             ├── rom.v      : ブートローダー
