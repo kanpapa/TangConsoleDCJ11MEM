@@ -1,0 +1,325 @@
+# unix v7
+## ディストリビューションテープからのインストール
+- [https://www.tuhs.org/Archive/Distributions/Research/Keith_Bostic_v7/](https://www.tuhs.org/Archive/Distributions/Research/Keith_Bostic_v7/)にあるf?.gz をgunzipして，下記の配置でsdメモリに書き込み，PmodのSDメモリに搭載します．
+```
+dd if=f0 of=v7tape.dsk
+dd if=f1 of=v7tape.dsk seek=65536 conv=notrunc
+dd if=f2 of=v7tape.dsk seek=131072 conv=notrunc
+dd if=f3 of=v7tape.dsk seek=196608 conv=notrunc
+dd if=f4 of=v7tape.dsk seek=262144 conv=notrunc
+dd if=f5 of=v7tape.dsk seek=327680 conv=notrunc
+dd if=f6 of=v7tape.dsk seek=393216 conv=notrunc
+
+dd if=v7tape.dsk of=/dev/xxx
+```
+- Tang Consoleには空のSDメモリ(HDD用)を搭載します．
+- https://www.tuhs.org/Archive/Distributions/Research/Documentation/v7_setup.html の手順に従ってインストールします．
+- rom.vにより，100000番地以降にテープ用のブートローダーが書かれているのでODTで100000gで0番地に読み込まれます．これを0gで実行します．
+```
+?
+@100000g
+100014
+@0gBoot
+: tm(0,3)
+file sys size: 5000
+file system: rp(0,0)
+isize = 1600
+m/n = 3 500
+Exit called
+Boot
+: tm(0,3)
+file sys size: 74000
+file system: rp(0,7000)
+isize = 23680
+m/n = 3 500
+Exit called
+Boot
+: tm(0,4)
+Tape? tm(0,5)
+Disk? rp(0,0)
+Last chance before scribbling on disk. 
+End of tape
+Boot
+: tm(0,4)
+Tape? tm(0,6)
+Disk? rp(0,7000)
+Last chance before scribbling on disk. 
+End of tape
+Boot
+: rp(0,0)rptmunix
+No more file slots
+Trap 30340
+
+014676
+@100000g
+@0Boot
+: rp(0,0)rptmunix
+mem = 178624
+# FSCK /DEV/RP0A
+FSCK: NOT FOUND
+# LS -L /DEV/
+TOTAL 2
+CRW--W--W- 1 ROOT    0,  0 DEC 31 19:00 CONSOLE
+CRW-R--R-- 1 BIN     8,  1 JAN 10 15:40 KMEM
+-RW-RW-R-- 1 BIN       775 JAN 10 15:26 MAKEFILE
+CRW-R--R-- 1 BIN     8,  0 JAN 10 15:39 MEM
+CRW-RW-RW- 1 BIN     8,  2 JAN 23 16:35 NULL
+CRW-RW-RW- 1 BIN    17,  0 JAN 10 15:40 TTY
+# CD DEV
+# MAKE RP03
+/ETC/MKNOD RP0 B 1 1
+/ETC/MKNOD SWAP B 1 2
+/ETC/MKNOD RP3 B 1 3
+/ETC/MKNOD RRP0 C 11 1
+/ETC/MKNOD RRP3 C 11 3
+CHMOD GO-W RP0 SWAP RP3 RRP0 RRP3
+# LS -L
+TOTAL 2
+CRW--W--W- 1 ROOT    0,  0 DEC 31 19:01 CONSOLE
+CRW-R--R-- 1 BIN     8,  1 JAN 10 15:40 KMEM
+-RW-RW-R-- 1 BIN       775 JAN 10 15:26 MAKEFILE
+CRW-R--R-- 1 BIN     8,  0 JAN 10 15:39 MEM
+CRW-RW-RW- 1 BIN     8,  2 JAN 23 16:35 NULL
+BRW-R--R-- 1 ROOT    1,  1 DEC 31 19:00 RP0
+BRW-R--R-- 1 ROOT    1,  3 DEC 31 19:00 RP3
+CRW-R--R-- 1 ROOT   11,  1 DEC 31 19:00 RRP0
+CRW-R--R-- 1 ROOT   11,  3 DEC 31 19:00 RRP3
+BRW-R--R-- 1 ROOT    1,  2 DEC 31 19:00 SWAP
+CRW-RW-RW- 1 BIN    17,  0 JAN 10 15:40 TTY
+# MAKE TM
+/ETC/MKNOD MT0 B 3 0
+/ETC/MKNOD RMT0 C 12 0
+/ETC/MKNOD NRMT0 C 12 128
+CHMOD GO+W MT0 RMT0 NRMT0
+# /ETC/MOUNT /DEV/RP3 /USR
+# LS /USR/MDEC
+HPUBOOT
+HPUBOOT.S
+MAKEFILE
+RPUBOOT
+RPUBOOT.S
+# DD IF=/USR/MDEC/RPUBOOT OF=/DEV/RP0 COUNT=1
+0+1 RECORDS IN
+0+1 RECORDS OUT
+# SYNC
+# SYNC
+# SYNC
+# 
+002306
+@100000g
+100014
+@0Boot
+: rp(0,0)rptmunix
+mem = 178624
+# /ETC/FSCK /DEV/RRP0
+/ETC/FSCK: NOT FOUND
+# FSCK /DEV/RRP0
+FSCK: NOT FOUND
+# /ETC/MOUNT /DEV/RP3 /USR
+# LS USR/BIN
+USR/BIN NOT FOUND
+# LS USR
+DICT
+DMR
+DOC
+GAMES
+INCLUDE
+LIB
+MAN
+MDEC
+PUB
+SPOOL
+SRC
+SYS
+TMP
+# LS BIN
+1
+AC
+ADB
+AR
+ARCV
+AS
+AT
+AWK
+BAS
+BASENAME
+BC
+CAL
+CALENDAR
+CAT
+CB
+CC
+CHECKEQ
+CHGRP
+CHMOD
+CHOWN
+CLRI
+CMP
+COL
+COMM
+CP
+CRYPT
+CU
+DATE
+DC
+DCHECK
+DD
+DEROFF
+DF
+DIFF
+DIFF3
+DU
+DUMP
+DUMPDIR
+ECHO
+ED
+EGREP
+ENROLL
+EQN
+EXPR
+F77
+FACTOR
+FALSE
+FGREP
+FILE
+FIND
+GRAPH
+GREP
+ICHECK
+IOSTAT
+JOIN
+KILL
+LD
+LEARN
+LEX
+LINT
+LN
+LOGIN
+LOOK
+LOOKBIB
+LORDER
+LS
+M4
+MAIL
+MAKE
+MAN
+MESG
+MKDIR
+MV
+NCHECK
+NEQN
+NEWGRP
+NICE
+NM
+NOHUP
+NROFF
+OD
+OSH
+PASSWD
+PCC
+PLOT
+PR
+PREP
+PRIMES
+PROF
+PS
+PSTAT
+PTX
+PWD
+QUOT
+RANDOM
+RANLIB
+RATFOR
+REFER
+RESTOR
+REV
+RM
+RMDIR
+ROFF
+SA
+SED
+SH
+SIZE
+SLEEP
+SORT
+SP
+SPELL
+SPLINE
+SPLIT
+STRIP
+STRUCT
+STTY
+SU
+SUM
+SYNC
+T300
+T300S
+T450
+TABS
+TAIL
+TAR
+TBL
+TC
+TEE
+TEK
+TEST
+TIME
+TK
+TOUCH
+TP
+TR
+TROFF
+TRUE
+TSORT
+TTY
+UNIQ
+UNITS
+UUCP
+UULOG
+UUX
+VPLOT
+VPR
+WC
+WHO
+WRITE
+XGET
+XSEND
+YACC
+YES
+# LS /USR
+DICT
+DMR
+DOC
+GAMES
+INCLUDE
+LIB
+MAN
+MDEC
+PUB
+SPOOL
+SRC
+SYS
+TMP
+# LS -L /USR
+TOTAL 15
+DRWXRWXR-X 3 BIN       128 JAN 10 15:18 DICT
+DRWXRWXR-X 2 DMR       400 MAY 16 15:37 DMR
+DRWXRWXR-X21 BIN       688 JAN 20 05:57 DOC
+DRWXRWXR-X 5 BIN       416 JAN 10 15:19 GAMES
+DRWXRWXR-X 3 BIN       496 MAY  5 02:16 INCLUDE
+DRWXRWXR-X10 BIN       544 MAY 15 23:38 LIB
+DRWXRWXR-X11 BIN       176 JAN 10 15:17 MAN
+DRWXRWXR-X 2 BIN       112 JAN 10 15:24 MDEC
+DRWXRWXR-X 2 BIN        80 JAN 10 15:19 PUB
+DRWXRWXR-X 6 BIN        96 MAY 11 02:50 SPOOL
+DRWXRWXR-X12 BIN       208 JAN 22 18:57 SRC
+DRWXRWXR-X 7 SYS       128 MAY 14 00:12 SYS
+DRWXRWXRWX 2 BIN       224 MAY 16 15:28 TMP
+# DF
+/DEV/RP0 987
+/DEV/RP3 54365
+# SYNC
+# SYNC
+# SYNC
+# SYNC
+```

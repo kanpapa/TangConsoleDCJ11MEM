@@ -8,11 +8,16 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - PDP-11の命令セットを持つCPU「DEC DCJ11」のメモリシステムと周辺装置をFPGAボード(Tang Console 138K)上に実装する試みです．
 - TangNano20Kを用いた同様のプロジェクト[TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM)の続編です．
 
+各種説明は[doc/](./doc/)にあるファイルに記載しています．
+
 ## 最近の話題
-- 2025/09/12: PmodにWS2812アレイを接続してアドレスやデータを表示させてみました．
-- 2025/09/22: PmodのSDメモリに紙テープエミュレータを実装しました．tape BASICの実行や，unix v1, v6で読めます．
-- 2025/09/25: RT-11 v4がブートできました．
-- 2025/09/26: READMEにpmod端子，オンボードSWの説明を追加しました．
+- 以前の話題は[更新ログ](doc/00_updatelog.md)参照
+- 2025/10/17
+  - 磁気テープリーダ(TM11)等を実装してunix v7や2.9BSDをインストール可能なバージョン(20251017)を公開しました．わりと大幅なアップデートです．
+  - ブートローダーのアドレスを実物のROM(BM873-YA)に準拠させるように変更しました．主なアドレスは下記のようになっています．詳細は[xxx](doc/xxx)を参照して下さい．
+    - RK(unix v1): 773700
+    - RP(unix v6, RT-11等): 773010
+  - 説明文書を[doc/](./doc/)にまとめました．まだログファイルそのままだったりソースのコメントのコピペばかりですが，動かすのに必要な情報は揃っていると思います．気が向いたらもう少し書き直します．
 
 ## 主要なファイル一覧
 ```
@@ -21,6 +26,22 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │   ├── Caldera-license.pdf : UNIXのライセンス条項
 │   ├── sd-unix-v1.dsk      : unix v1用disk image
 │   └── sd-unix-v6.dsk      : unix v6用disk image
+├── doc                      : 説明用文書
+│   ├── 01_updatelog.md
+│   ├── 02_PCB.md
+│   ├── 03_FPGA.md
+│   ├── 04_Interface.md
+│   ├── 05_SDmemory.md
+│   ├── 06_applications.md
+│   ├── 06-1-bootloader.md
+│   ├── 06-2_papertapebasic.md
+│   ├── 06-3_unix-v1.md
+│   ├── 06-4_unix-v6.md
+│   ├── 06-5_unix-v7.md
+│   ├── 06_6_unix-2.9BSD.md
+│   ├── 06_7_RT-11v4.md
+│   ├── 07_debugtool
+│   └── 08_references.md
 ├── hdl                      : Gowin EDA用プロジェクト
 │   ├── old                 : 旧版のバックアップ
 │   └── TangConsoleDCJ11MEM_project.xxxxxxxx
@@ -32,6 +53,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 │             ├── top.v      : メインプログラム
 │             ├── uart.v     : uartモジュール
 │             └── ws2812.v   : WS2812モジュール
+├── images                    : 文書用画像ファイル
 ├── pcb
 │   └── rev2.0 : 回路図，基板データ等(KiCAD 8用)
 └── README.md
@@ -58,220 +80,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - まれに(電源投入直後が多い)v6のブート時にpanicになって止まることがあります．
 Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．
 - v6のファイルシステムは壊れやすいような気がします．電源断前にはsync3〜4回のおまじないが必要かも．
-
-# ハードウェア
-## FPGAに実装した機能
-- コンソール入出力用UART
-- Initialization Sequence時のPower-Up Configuration Register設定
-- メモリ
-  - 256KB RAM (760000-777777はI/O空間とROM用なので使えるのは248KB)
-  - ブート用ROM
-- ハードディスクドライブ RF11, RK11 (sdメモリによるエミュレーション)
-- 外部演算装置 KE11-A (unix v1に必須)
-- 紙テープリーダパンチャ PC11
-- クロック KW11-L
-- BS0, BS1は見ていません．DAL[15:0]とAIO[3:0]を見ればとりあえず十分だったので．
-- DAL[21:18]も見ていません．
-
-## 基板 rev.2.0
-- TangNano20K版とは違い，レベル変換ICをCPUボードに搭載してみました．(20K版の方でもCPUボード上に搭載した基板(rev3)を作りました．)
-- CPUの入力信号(FPGA→CPU)はレベル変換せずに直接接続しています．
-- ABORT_nはオープンコレクタなので下記のように実装しています．
-```
-  assign ABORT_n = bus_error ? 1'b0 : 1'bz; // simulate open collector output
-```
-![](images/rev20.jpg)
-#### BOM
-|Reference          |Qty| Value          |Size |Memo |
-|-------------------|---|----------------|-----|-----|
-|C1,C2              |2  |68pF            |||
-|C3,C5,C6,C7,C8     |5  |0.1uF           |||
-|C4                 |1  |1uF           |||
-|C9,C10             |2	|0.33uF	         |||
-|C11                |1  |47uF            |||
-|D1                 |1  |LED             || |
-|J1                 |1  |pin socket|2x20|TangConsole接続用．基板背面に実装．|
-|J2,J3              |2  |pin header or socket|1x30|任意．テストや観測，実験用．|J4                 |1  |pin header      |1x06 L字|UART用|
-|J5                 |1  |pin header or socket |2x03 |不要．将来使うかもしれない実験用．|
-|R1                 |1  |1M              |||
-|R2,R3,R4,R5,R6,R7,R8,R9,R10   |9  |10k            || |
-|R11                |1  |33             ||CLK2(出力)のダンピング抵抗．|
-|R12                |1  |100k            || 値はLEDに合わせて任意．|
-|R13,R14            |2  |1k              |||
-|SW1,SW2            |2  |tactile SW      |6mmxH4.3mm|例: https://akizukidenshi.com/catalog/g/g103647/ |
-|U1                 |1  |DCJ11           |60pin DIP 1300mil| 1x30 の丸ピンソケット2列|
-|U2,U3,U4,U5        |4  |SN74CB3T3245DWR (又はDW) |SOIC-20|https://mou.sr/3URN55f https://www.digikey.jp/short/9485r0f0  |
-|U6                 |1  |NJM12888F33     |SOT-23-5 | https://akizukidenshi.com/catalog/g/g110675/|
-|Y1                 |1  |18MHz           |HC49|例: https://mou.sr/3WcWExh ．|
-
-- SN74CB3T3245はパッケージサイズに注意．SOIC-20はDWかDWRです．PWやPWRではありません．
-- R11は"33k"ではなく"33"です．ダンピング抵抗なので．
-- R12，最近のLEDは明るいので100kぐらいでちょうど良かったりします．使うLEDに応じて適切な値を選んで下さい．
--  Y1はもしかしたら周波数を変える必要があるかもしれないのでソケットを使用する方がいいかも．動作確認は18MHzでしかやってませんが．
-- C9,C10はDECのプロセッサボードで0.33uFを使っていたのでそうしましたが，間違って0.1uFを載せても動きました．
-
-# 使い方
-## ターミナルソフト(TeraTerm, PDP11GUI)との接続
-- TTY入出力はTangConsoleのUSB(JTAGと共用)とCPU基板のUARTの2箇所に同じものが出ています．当初USBが不安定だったのでそのようにしたのですが，今はわりと安定してきたのでUSBだけでOKです．(両方使うとTeraTermとPDP11GUIを同時に接続できます．)
-- TeraTermの設定
-  - 基本的には115200bps,8N1N．ただし，UNIX V6だと7bit, parity=spaceにする必要あり．
-  - 改行コードは入力出力ともCR
-  - 送信遅延 10ms/字, 100ms/行
-- CPU基板のUARTは，TXは3.3V出力(5VTTLで受信可)，RXは5V耐性なので，USBシリアル変換ケーブルは3.3V用，5V用のどちらでもOKです．
-
-## Pmodコネクタ
-- Tang ConsoleのPmodを下記のように使用しています．
-```
-Pmod1: debug interface
-LOG_TX:  デバッグ用のログ(ディスクアクセスや割り込み等)出力
-LED_RGB: LEDアレイ(WS2812)
-+-----+-----+--------+--------+--------+--------+
-| 3V3 | GND |LED_RGB |   NC   |   NC   |   NC   |
-+-----+-----+--------+--------+--------+--------+
-| 3V3 | GND |   NC   |   NC   |   NC   | LOG_TX |
-+-----+-----+--------+--------+--------+--------+
-
-Pmod0: paper tapeエミュレータ用SDメモリ．
-端子配列はDigilent Pmod MicroSD用です．
-+-----+-----+---------+---------+---------+---------+
-| 3V3 | GND |  CLK    |MISO(D0) |MOSI(CMD)| ~CS(D3) |
-+-----+-----+---------+---------+---------+---------+
-| 3V3 | GND | NC(~WP) |  ~DET   | NC(D2)  |  NC(D1) |
-+-----+-----+---------+---------+---------+---------+
-```
-## SW1, SW2
-Tang Consoleのオンボードスイッチ(SW1, SW2)
-- SW1: LEDアレイの出力内容切り替え．詳細はtop.v参照．
-- SW2: sdtape.vの書き込みバッファのフラッシュ
-- SW1, SW2同時押し: SDメモリモジュール，UARTのリセット
-  - Reconfigボタンでリセットの方を使うのであまり使っていません．
-
-# 各種OS起動例
-## UNIX V1
-- SDメモリにddでsd-unix-v1.dskを書き込み，TangConsoleのスロットにセットします．
-- 773000gでブートローダーを起動します．
-- loginプロンプトが出るのでrootでログインします．
-```
-@773000g
-login: root
-root
-# who
-root    tty8 Jan  1 00:03:47
-# date
-Fri Jan  1 00:03:50
-# chdir /tmp
-# cc aa.c
-I
-II
-# ls -l
-total   14
-127 sxrwrw  1 root   1062 Jan  1 00:00:00 a.out
-121 s-rwrw  1 root    651 Jan  1 00:00:00 aa.c
-129 s-rwrw  1 root   1104 Jan  1 00:00:00 aa.o
- 55 sxrwrw  1 root   1664 Jan  1 00:00:00 etma
- 56 sxrwrw  1 root     26 Jan  1 00:00:00 ttmp
- 57 sxrwrw  1 root    142 Jan  1 00:00:00 utmp
-# ./a.out
-
-0000001111111111111111122222223333469 67433222221111111100000000000000000000000
-000000011111111111111112222222334478  77933322222111111000000000000000000000000
-0000000011111111111122222233243456B     944333221111111000000000000000000000000
-0000000011111111211122222334556577A     965544422211110000000000000000000000000
-00000111111111122222233333447 98         E 778532111111110000000000000000000000
-00001111111122222232333344457                  43222111111000000000000000000000
-000001111111122333444444455                  A643322111111000000000000000000000
-000001111122223346666666667B                  A 4322111110000000000000000000000
-000001222222333457F A  C889                    64322111111000000000000000000000
-011111222223334458B      E                     93322111111111100000000000000000
-01111222333444689E                             53322111111111100000000000000000
-011122334555658                               643222221111111100000000000000000
-011123                                       8543322211111111100000000000000000
-011122334555658                               643222221111111100000000000000000
-01111222333444689E                             53322111111111100000000000000000
-011111222223334458B      E                     93322111111111100000000000000000
-000001222222333457F A  C889                    64322111111000000000000000000000
-000001111122223346666666667B                  A 4322111110000000000000000000000
-000001111111122333444444455                  A643322111111000000000000000000000
-00001111111122222232333344457                  43222111111000000000000000000000
-00000111111111122222233333447 98         E 778532111111110000000000000000000000
-0000000011111111211122222334556577A     965544422211110000000000000000000000000
-0000000011111111111122222233243456B     944333221111111000000000000000000000000
-000000011111111111111112222222334478  77933322222111111000000000000000000000000
-0000001111111111111111122222223333469 67433222221111111100000000000000000000000
-#
-```
-
-## UNIX V6
-- SDメモリにddでsd-unix-v6.dskを書き込み，TangConsoleのスロットにセットします．
-- 774000gでブートローダーを起動するとすぐにプロンプト'@'が出るので，'unix'と入力します．
-- loginプロンプトが出るのでrootでログインします．
-```
-@774000g@unix
-mem = 1026
-RESTRICTED RIGHTS
-
-Use, duplication or disclosure is subject to
-restrictions stated in Contract with Western
-Electric Company, Inc.
-
-login: root
-# who
-root    tty8 Oct 10 14:28
-# date
-Fri Oct 10 14:28:42 EDT 1975
-# ls -l
-total 247
-drwxrwxr-x  2 bin      1104 May 14 00:47 bin
-drwxrwxr-x  2 bin      1824 Oct 10 12:33 dev
-drwxrwxr-x  2 bin       496 Oct 10 14:28 etc
--rwxrwxrwx  1 root    29074 Oct 10 12:28 hpunix
-drwxrwxr-x  2 bin       464 Oct 10 13:28 lib
-drwxrwxr-x  2 bin        32 May 13 20:01 mnt
--rwxrwxrwx  1 root    28836 Oct 10 12:22 rkunix
--rwxrwxrwx  1 root    29020 Oct 10 12:25 rpunix
-drwxrwxrwx  2 bin       272 Oct 10 14:19 tmp
--rwxrwxrwx  1 root    30346 Oct 10 12:32 unix
-drwxrwxr-x 15 bin       240 Oct 10 12:35 usr
-#
-```
-
-## Paper Tape BASIC
-- Pmodのsdメモリを使って，[TangNano20K版のtapebasic](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/hdl/tapebasic)と同様の手順でBASICが起動できます．
-- SDメモリの先頭から0〜1GBを読み込み用，1GB〜2GBを書き込み用にしたので，SAVEコマンドも動いているはず．(SAVE後にSW2でバッファをフラッシュ．)
-```
-@157744g
-157500
-@157500g
-PDP-11 BASIC, VERSION 007A
-*O ?
-DO YOU NEED THE EXTENDED FUNCTIONS?Y
-HIGH-SPEED READER/PUNCH?N
-SET UP THE EXTERNAL FUNCTION?N
-MEMORY?56
-READY
-10 PRINT "HELLO WORLD"
-LIST
-
-10 PRINT "HELLO WORLD"
-READY
-RUN
-HELLO WORLD
-
-STOP AT LINE   10
-READY
-```
-
-# 補足情報
-## SDメモリ用イメージの作り方
-- [diskimageフォルダ](./diskimage)にあるイメージファイルはTangNano20Kのときと同じ方法で作成したものです．作り方は[unix-v1 SDメモリの準備](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v1)，
-[unix-v6 sd用イメージ作成手順](https://github.com/ryomuk/TangNanoDCJ11MEM/tree/main/applications/unix-v6) を参照して下さい．
-
-## Gowin EDA関連の注意点
-- Configurationのdual-purpose pinで，SSPI, READY, DONE, CPUをチェックします．
-- UARTのポートが複数あるので，Gowin programmerでは適切なポートを選択する必要があります．
-
-## デバッグ用端子
-- 基板の右上にあるBS[1:0], MAP_n, STRB_nは将来もしかしたら使うかもと思って用意している信号です．3.3Vに変換済みです．
+- v7でハードディスクにddしたbootloaderがちゃんと動かないような気がします．tapeのブートローダーでブートできます．
 
 ## 開発環境
 - Windows 11
@@ -279,12 +88,10 @@ READY
   - GOWIN FPGA Designer V1.9.11.02(64-bit)
   - VMware Workstation 17 Player
     - Ubuntu 22.04.4
+      - dd
       - simh
-  - TeraTerm
+- TeraTerm
   - PDP11GUI
-
-# 関連情報
-・ 関連情報，先行事例等については [TangNanoDCJ11MEM](https://github.com/ryomuk/TangNanoDCJ11MEM) の末尾にまとめてあります．
 
 # 動画
 - [UNIX V6 on DEC DCJ-11 (PDP-11) with Tang Console 138K](https://www.youtube.com/watch?v=6rK0t8tJp9Y)
@@ -295,3 +102,5 @@ READY
 - 2025/09/08: READMEに軽微な情報追加．
 - 2025/09/22: 20250922版(pmod paper tape実装)暫定公開．(説明は未)
 - 2025/09/26: 20250926版公開．(RT-11 v4起動)
+- 2025/10/19: 20251017版公開．(磁気テープ実装, unix v7, 2.9BSD起動)
+- 2025/10/19: ドキュメント構成見直し
