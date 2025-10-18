@@ -62,20 +62,23 @@ This document is written mostly in Japanese. If necessary, please use a translat
 - その他の部分についてはMITライセンスです．
 
 ## 動作状況
-- UNIX first edition (UNIX V1), UNIX 6th editon (UNIX V6)が起動します．
-  - unix v1
-    - multi userで起動，rootでログインできました．
-    - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
-  - unix v6
-    - multi userで起動，rootでログインできました．
-    - /usr/games/ にあるchessやbj, tttなどが動きました．
-    - 実機でカーネルの再構築ができました．
-  - paper tape
-    - paper tape BASICが起動して簡単なプログラムが動作しました．
-    - unix v1, unix v6のデバイスとして読むことができました．
-  - rt-11 v4
-    - 起動してHELP, DIRが動きました．
-
+- unix v1
+  - multi userで起動，rootでログインできました．
+  - edでASCIIARTのプログラムを書いてccでセルフコンパイルして実行できました．
+- unix v6
+  - multi userで起動，rootでログインできました．
+  - /usr/games/ にあるchessやbj, tttなどが動きました．
+  - 実機でカーネルの再構築ができました．
+- paper tape
+  - paper tape BASICが起動して簡単なプログラムが動作しました．
+  - unix v1, unix v6のデバイスとして読むことができました．
+- rt-11 v4
+  - 起動してHELP, DIRが動きました．(top.vのオプションを変更してビルドする必要あり)
+- unix v7  
+  - ディストリビューションテープからインストールとブートができました．
+- 2.9BSD
+  - ディストリビューションテープからインストールとブートができました．
+  
 ## 既知の問題
 - まれに(電源投入直後が多い)v6のブート時にpanicになって止まることがあります．
 Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．
