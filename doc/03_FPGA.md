@@ -1,17 +1,27 @@
 # ビルド時の注意点
 ## config
-- Configurationのdual-purpose pinで，SSPI, READY, DONE, CPUをチェックします．
+- Configulationはimpl/の*.config.jsonに保存されているようなので，特に何もする必要は無いはずですが，もしエラーが出た場合はConfigurationのdual-purpose pinで，SSPI, READY, DONE, CPUをチェックします．
 ![](../images/DualPurposePins.png)
+
+## warning
+- 下記のwarningが出ますが，対処方法がいまいちわからないので放置しています．
+```
+WARN  (PR1014) : Generic routing resource will be used to clock signal 'sys_clk50_d' by the specified constraint. And then it may lead to the excessive delay or skew
+WARN  (PR1014) : Generic routing resource will be used to clock signal 'CLK2_d' by the specified constraint. And then it may lead to the excessive delay or skew
+WARN  (PR1014) : Generic routing resource will be used to clock signal 'ALE_n_d' by the specified constraint. And then it may lead to the excessive delay or skew
+```
 
 ## program
 - UARTのポートが複数あるので，Gowin programmerでは適切なポートを選択する必要があります．
-![ここに画像追加予定]()
-- SRAMではなくflashメモリに書き込みます．数分かかります．
-![ここに画像追加予定]()
+![](../images/FPGA-programport.png)
+- SRAMではなくflashメモリに書き込みます．1〜2分かかります．
+  - Access Mode: External Flash Mode 5A
+  - Operation: exFlash Erace, Program thru GAO-Bridge 5A
+![](../images/FPGA-flash.png)
 
 ## reconfigボタン
-- Tang Consoleになって付いたreocnfigボタンがかなり便利です．FPGAをreconfigして初期化してくれます．Tang Nano 20Kのときには付いていなかった(それ用のパッドはある)ので毎回書き込み直していました．
-![ここに画像追加予定]()
+- Tang Consoleになって付いたreocnfigボタンがかなり便利です．FPGAをflashメモリからreconfigしてBSRAMやレジスタを初期化してくれます．Tang Nano 20Kのときには付いていなかった(それ用のパッドはある)ので毎回書き込み直していました．
+![](../images/FPGA-reconfig.jpg)
 
 # FPGAに実装した機能
 - コンソール入出力用UART
