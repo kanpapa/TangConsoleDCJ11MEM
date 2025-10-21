@@ -80,8 +80,7 @@ This document is written mostly in Japanese. If necessary, please use a translat
   - ディストリビューションテープからインストールとブートができました．
   
 ## 既知の問題
-- まれに(電源投入直後が多い)v6のブート時にpanicになって止まることがあります．
-Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．
+- 電源投入直後はブートに失敗することが多い気がします．Tang Console のreconfigボタン(pmodコネクタのあたりにあるやつ)を押してリセットしてからリトライすると直ることが多いです．
 - v6のファイルシステムは壊れやすいような気がします．電源断前にはsync3〜4回のおまじないが必要かも．
 - v7でハードディスクにddしたbootloaderがちゃんと動かないような気がします．tapeのブートローダーでブートできます．
 
